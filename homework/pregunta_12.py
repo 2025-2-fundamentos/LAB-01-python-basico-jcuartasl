@@ -15,3 +15,18 @@ def pregunta_12():
     {'A': 177, 'B': 187, 'C': 114, 'D': 136, 'E': 324}
 
     """
+    with open("files/input/data.csv", "r") as file:
+        registers = {}
+        for line in file:
+            columns = line.split("\t")
+            letter = columns[0]
+            col5_values = columns[4].strip().split(",")
+            sum = 0
+            for elem in col5_values:
+                value = int(elem.split(":")[1])
+                sum += value
+            if letter in registers:
+                registers[letter] += sum
+            else:
+                registers[letter] = sum
+    return dict(sorted(registers.items()))

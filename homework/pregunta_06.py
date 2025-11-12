@@ -26,3 +26,24 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+    with open("files/input/data.csv", "r") as file:
+        corr = {}
+
+        for line in file:
+            columns = line.split("\t")
+            claves = columns[4].split(",")
+            for clave in claves:
+                cla = clave.split(":")
+                key = cla[0]
+                value = int(cla[1])
+                if key in corr:
+                    if corr[key][0] > value:
+                        corr[key][0] = value
+                    if corr[key][1] < value:
+                        corr[key][1] = value
+                else:
+                    corr[key] = [value, value]
+
+        salida = [tuple([clave] + valores) for clave, valores in corr.items()]
+
+    return sorted(salida)

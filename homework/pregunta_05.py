@@ -15,3 +15,24 @@ def pregunta_05():
     [('A', 9, 2), ('B', 9, 1), ('C', 9, 0), ('D', 8, 3), ('E', 9, 1)]
 
     """
+    with open("files/input/data.csv", "r") as file:
+        corr = {"A":0,
+                "B":1,
+                "C":2,
+                "D":3,
+                "E":4}
+        max = [0] * len(sorted(corr))
+        min = [float("inf")] * len(sorted(corr))
+        for line in file:
+            columns = line.split("\t")
+            reg = corr[columns[0]]
+            if max[reg] < int(columns[1]):
+                max[reg] = int(columns[1])
+            if min[reg] > int(columns[1]):
+                min[reg] = int(columns[1])
+
+        result = []
+        for register in corr.items():
+            c = register[1]
+            result.append((register[0],max[c],min[c]))
+    return sorted(result)

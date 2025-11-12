@@ -24,3 +24,17 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+    with open("files/input/data.csv", "r") as file:
+        corr = {}
+
+        for line in file:
+            columns = line.split("\t")
+            claves = columns[4].split(",")
+            for clave in claves:
+                key = clave.split(":")[0]
+
+                if key in corr:
+                    corr[key] += 1
+                else:
+                    corr[key] = 1
+    return dict(sorted(corr.items()))

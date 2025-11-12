@@ -25,3 +25,18 @@ def pregunta_07():
      (9, ['A', 'B', 'E', 'A', 'A', 'C'])]
 
     """
+    with open("files/input/data.csv", "r") as file:
+        corr = {}
+
+        for line in file:
+            columns = line.split("\t")
+            key = int(columns[1])
+            value = columns[0]
+            if key in corr:
+                corr[key].append(value)
+            else:
+                corr[key] = [value]
+
+        salida = [(clave, valores) for clave, valores in corr.items()]
+
+    return sorted(salida)

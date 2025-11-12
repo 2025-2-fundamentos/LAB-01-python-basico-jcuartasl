@@ -16,3 +16,17 @@ def pregunta_11():
 
 
     """
+    with open("files/input/data.csv", "r") as file:
+        registers = {}
+        
+        for line in file:
+            columns = line.split("\t")
+            value = int(columns[1])
+            claves = columns[3].split(",")
+            for key in claves:
+                if key in registers:
+                    registers[key] += value
+                else:
+                    registers[key] = value
+    return dict(sorted(registers.items()))
+
